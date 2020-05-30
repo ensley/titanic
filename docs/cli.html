@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Makefile rules &#8212; titanic  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python Documentation" href="api.html" />
+    <link rel="prev" title="Titanic: Machine Learning from Disaster" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="makefile-rules">
+<h1>Makefile rules<a class="headerlink" href="#makefile-rules" title="Permalink to this headline">¶</a></h1>
+<p>The project comes with these <code class="docutils literal notranslate"><span class="pre">make</span></code> directives:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Available rules:
+
+clean               Delete all models and data
+data                Transform raw data
+docs                Build documentation and copy it to the docs folder
+githooks            Set up githooks
+models              Train models
+mostlyclean         Delete all models and data, except for the raw downloads
+predictions         Create predictions
+raw_data            Pull raw data from Kaggle
+</pre></div>
+</div>
+<p>This page describes what each of these directives does in a bit more detail.</p>
+<div class="section" id="make-clean">
+<h2><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code><a class="headerlink" href="#make-clean" title="Permalink to this headline">¶</a></h2>
+<p>Deletes all models and data that are created over the course of the project
+pipeline. This deletes the raw data as well, so the data will have to be
+re-downloaded from Kaggle once <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> is performed. To delete
+everything but keep the raw data, use <a class="reference internal" href="#make-mostlyclean"><span class="std std-ref">make mostlyclean</span></a>.</p>
+</div>
+<div class="section" id="make-data">
+<h2><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">data</span></code><a class="headerlink" href="#make-data" title="Permalink to this headline">¶</a></h2>
+<p>Takes the data from raw to processed and ready for modeling.
+Runs <a class="reference internal" href="api.html#titanic.data.clean.main" title="titanic.data.clean.main"><code class="xref py py-func docutils literal notranslate"><span class="pre">main()</span></code></a> and saves the output to <code class="docutils literal notranslate"><span class="pre">data/interim</span></code>.
+Then runs <a class="reference internal" href="api.html#titanic.features.transform.main" title="titanic.features.transform.main"><code class="xref py py-func docutils literal notranslate"><span class="pre">main()</span></code></a> and saves the final data
+to <code class="docutils literal notranslate"><span class="pre">data/processed</span></code>.</p>
+</div>
+<div class="section" id="make-docs">
+<h2><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code><a class="headerlink" href="#make-docs" title="Permalink to this headline">¶</a></h2>
+<p>Steps into <code class="docutils literal notranslate"><span class="pre">docsrc/</span></code> and runs <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code>, copying the built documentation
+to <code class="docutils literal notranslate"><span class="pre">docs/</span></code>. This allows the documentation to easily be hosted on Github Pages.</p>
+</div>
+<div class="section" id="make-githooks">
+<h2><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">githooks</span></code><a class="headerlink" href="#make-githooks" title="Permalink to this headline">¶</a></h2>
+<p>Sets up the pre-commit git hook that’s stored in the <code class="docutils literal notranslate"><span class="pre">.githooks</span></code> folder.
+You can use this in your git repository to prevent Jupyter notebooks from
+being committed without being converted to output-free Python scripts first.
+It isn’t necessary to use this command to replicate any part of the analysis.</p>
+</div>
+<div class="section" id="make-models">
+<h2><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">models</span></code><a class="headerlink" href="#make-models" title="Permalink to this headline">¶</a></h2>
+<p>Trains the models using the processed training data. Serializes the fitted
+models and stores them in <code class="docutils literal notranslate"><span class="pre">models/fitted</span></code>.</p>
+</div>
+<div class="section" id="make-mostlyclean">
+<span id="id1"></span><h2><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">mostlyclean</span></code><a class="headerlink" href="#make-mostlyclean" title="Permalink to this headline">¶</a></h2>
+<p>Deletes all models and data that are created over the course of the project
+pipeline, but keeps the raw data intact so that the Kaggle download does not
+need to be repeated.</p>
+</div>
+<div class="section" id="make-predictions">
+<h2><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">predictions</span></code><a class="headerlink" href="#make-predictions" title="Permalink to this headline">¶</a></h2>
+<p>Generates predictions from the fitted models in <code class="docutils literal notranslate"><span class="pre">models/fitted</span></code> and using
+the processed test data in <code class="docutils literal notranslate"><span class="pre">data/processed</span></code>. Saves the predictions in
+<code class="docutils literal notranslate"><span class="pre">models/predictions</span></code>.</p>
+</div>
+<div class="section" id="make-raw-data">
+<h2><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">raw_data</span></code><a class="headerlink" href="#make-raw-data" title="Permalink to this headline">¶</a></h2>
+<p>Downloads the raw data from Kaggle. This requires the <a class="reference external" href="https://www.kaggle.com/docs/api">Kaggle API</a>
+to be installed and properly configured.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/titanic.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">titanic</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=ensley&repo=titanic&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Makefile rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#make-clean"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-data"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-docs"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-githooks"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">githooks</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-models"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">models</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-mostlyclean"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">mostlyclean</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-predictions"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">predictions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-raw-data"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">raw_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Python Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/01-initial-data-exploration.html">Initial Data Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/02-feature-engineering.html">Feature Engineering</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Titanic: Machine Learning from Disaster</a></li>
+      <li>Next: <a href="api.html" title="next chapter">Python Documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, John Ensley.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/cli.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

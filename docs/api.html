@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Python Documentation &#8212; titanic  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Initial Data Exploration" href="source/01-initial-data-exploration.html" />
+    <link rel="prev" title="Makefile rules" href="cli.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="python-documentation">
+<h1>Python Documentation<a class="headerlink" href="#python-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-titanic.data.clean">
+<span id="data-module"></span><h2>Data module<a class="headerlink" href="#module-titanic.data.clean" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="titanic.data.clean.fix_categories">
+<code class="sig-prename descclassname">titanic.data.clean.</code><code class="sig-name descname">fix_categories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pandas.DataFrame</span></em><span class="sig-paren">)</span> &#x2192; pandas.DataFrame<a class="headerlink" href="#titanic.data.clean.fix_categories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename the levels of certain categorical variables in the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> – The data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The data with the following variables transformed.</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Pclass</span></code> from 1, 2, 3 to “Upper”, “Middle”, and “Lower”. It is
+also converted from unordered to ordered.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Embarked</span></code> from “C”, “Q”, and “S” to “Cherbourg”, “Queenstown”,
+and “Southampton”</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.data.clean.main">
+<code class="sig-prename descclassname">titanic.data.clean.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_filepath</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">output_filepath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#titanic.data.clean.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper around <a class="reference internal" href="#titanic.data.clean.make_dataset" title="titanic.data.clean.make_dataset"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_dataset()</span></code></a> that can be called
+from the command line.</p>
+<p>The combined data set is pickled and saved to <code class="docutils literal notranslate"><span class="pre">output_filepath</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_filepath</strong> – Path to the raw data</p></li>
+<li><p><strong>output_filepath</strong> – Path where the combined data set will be saved</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.data.clean.make_dataset">
+<code class="sig-prename descclassname">titanic.data.clean.</code><code class="sig-name descname">make_dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_filepath</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span> &#x2192; pandas.DataFrame<a class="headerlink" href="#titanic.data.clean.make_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in the raw Titanic data and combine it into a single dataset
+with correct data types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_filepath</strong> – Path to the raw data (<code class="docutils literal notranslate"><span class="pre">train.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">test.csv</span></code>)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A DataFrame containing <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> data stacked together.
+It has a MultiIndex where the inner level is the passenger ID and
+the outer level is “train” or “test” depending on the source of the
+row. That way, the training and test datasets can be easily recovered
+using <code class="docutils literal notranslate"><span class="pre">df.loc['train']</span></code> or <code class="docutils literal notranslate"><span class="pre">df.loc['test']</span></code> respectively.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.data.clean.read_data">
+<code class="sig-prename descclassname">titanic.data.clean.</code><code class="sig-name descname">read_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fp</span><span class="p">:</span> <span class="n">pathlib.Path</span></em><span class="sig-paren">)</span> &#x2192; pandas.DataFrame<a class="headerlink" href="#titanic.data.clean.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read in a raw data file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fp</strong> – Path to the raw data file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-titanic.features.transform">
+<span id="features-module"></span><h2>Features module<a class="headerlink" href="#module-titanic.features.transform" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="titanic.features.transform.engineer_features">
+<code class="sig-prename descclassname">titanic.features.transform.</code><code class="sig-name descname">engineer_features</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pandas.DataFrame</span></em><span class="sig-paren">)</span> &#x2192; pandas.DataFrame<a class="headerlink" href="#titanic.features.transform.engineer_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the data by imputing and creating new features that will be useful for
+prediction.</p>
+<dl class="simple">
+<dt>Performs the following steps:</dt><dd><ol class="arabic simple">
+<li><p>Converts <code class="docutils literal notranslate"><span class="pre">Survived</span></code> to 0/1 rather than <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p>Creates an indicator for missing <code class="docutils literal notranslate"><span class="pre">Cabin</span></code> information</p></li>
+<li><p>Extracts titles from <code class="docutils literal notranslate"><span class="pre">Name</span></code></p></li>
+<li><p>Defines <code class="docutils literal notranslate"><span class="pre">Relatives</span></code>, the sum of <code class="docutils literal notranslate"><span class="pre">SibSp</span></code> and <code class="docutils literal notranslate"><span class="pre">Parch</span></code></p></li>
+<li><p>Bins <code class="docutils literal notranslate"><span class="pre">Relatives</span></code>, <code class="docutils literal notranslate"><span class="pre">SibSp</span></code> and <code class="docutils literal notranslate"><span class="pre">Parch</span></code></p></li>
+<li><p>Drops <code class="docutils literal notranslate"><span class="pre">Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Ticket</span></code> and <code class="docutils literal notranslate"><span class="pre">Cabin</span></code></p></li>
+<li><p>Imputes <code class="docutils literal notranslate"><span class="pre">Embarked</span></code> using the most frequent embarkation port</p></li>
+<li><p>Imputes <code class="docutils literal notranslate"><span class="pre">Age</span></code> and <code class="docutils literal notranslate"><span class="pre">Fare</span></code> based on 5-nearest neighbors</p></li>
+<li><p>Scales <code class="docutils literal notranslate"><span class="pre">Age</span></code> and <code class="docutils literal notranslate"><span class="pre">Fare</span></code></p></li>
+<li><p>Bins <code class="docutils literal notranslate"><span class="pre">Age</span></code></p></li>
+<li><p>One-hot encodes categorical variables</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> – Cleaned and combined data output by <a class="reference internal" href="#titanic.data.clean.make_dataset" title="titanic.data.clean.make_dataset"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_dataset()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The processed data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.features.transform.main">
+<code class="sig-prename descclassname">titanic.features.transform.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_filepath</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">output_filepath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#titanic.features.transform.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper around <a class="reference internal" href="#titanic.features.transform.engineer_features" title="titanic.features.transform.engineer_features"><code class="xref py py-func docutils literal notranslate"><span class="pre">engineer_features()</span></code></a>
+that can be called from the command line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_filepath</strong> – Path to the data created by <a class="reference internal" href="#titanic.data.clean.make_dataset" title="titanic.data.clean.make_dataset"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_dataset()</span></code></a></p></li>
+<li><p><strong>output_filepath</strong> – Path where the processed data will be saved</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-titanic.models.train">
+<span id="train-module"></span><h2>Train module<a class="headerlink" href="#module-titanic.models.train" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="titanic.models.train.fit_model">
+<code class="sig-prename descclassname">titanic.models.train.</code><code class="sig-name descname">fit_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">pandas.DataFrame</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">pandas.Series</span></em>, <em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; sklearn.model_selection.RandomizedSearchCV<a class="headerlink" href="#titanic.models.train.fit_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit a model to data.</p>
+<p>Performs a 5-fold cross-validated randomized search to find optimal
+model hyperparameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Training data covariates</p></li>
+<li><p><strong>y</strong> – Training data response</p></li>
+<li><p><strong>model</strong> – <p>A dictionary where <code class="docutils literal notranslate"><span class="pre">model['estimator']</span></code> is a Scikit-learn estimator
+and <code class="docutils literal notranslate"><span class="pre">model['params']</span></code> is a set of parameter distributions that are
+passed to <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn-model-selection-randomizedsearchcv">RandomizedSearchCV</a>. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;estimator&#39;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(),</span>
+    <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">loguniform</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">)}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>seed</strong> – A random seed for the CV procedure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A fitted <code class="docutils literal notranslate"><span class="pre">RandomizedSearchCV</span></code> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.models.train.fit_models">
+<code class="sig-prename descclassname">titanic.models.train.</code><code class="sig-name descname">fit_models</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">pandas.DataFrame</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">pandas.Series</span></em>, <em class="sig-param"><span class="n">models</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>sklearn.model_selection.RandomizedSearchCV<span class="p">]</span><a class="headerlink" href="#titanic.models.train.fit_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit multiple models in succession.</p>
+<p>This is nothing more than an iteration through the models, calling <a class="reference internal" href="#titanic.models.train.fit_model" title="titanic.models.train.fit_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">fit_model()</span></code></a>
+on each one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Training data covariates</p></li>
+<li><p><strong>y</strong> – Training data response</p></li>
+<li><p><strong>models</strong> – A dictionary of model specifications</p></li>
+<li><p><strong>seed</strong> – A random seed to apply to each CV procedure</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary with keys matching the keys of <code class="docutils literal notranslate"><span class="pre">models</span></code> and values that
+are fitted RandomizedSearchCV objects.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.models.train.main">
+<code class="sig-prename descclassname">titanic.models.train.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_filepath</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">output_filepath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#titanic.models.train.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper around <a class="reference internal" href="#titanic.models.train.fit_models" title="titanic.models.train.fit_models"><code class="xref py py-func docutils literal notranslate"><span class="pre">fit_models()</span></code></a> that can be
+called from the command line.</p>
+<p>Fits the models, pickles the fitted model objects, and writes them out to
+<code class="docutils literal notranslate"><span class="pre">output_filepath</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_filepath</strong> – Path to the processed data</p></li>
+<li><p><strong>output_filepath</strong> – Path where the fitted models will be saved</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.models.train.print_cv_score">
+<code class="sig-prename descclassname">titanic.models.train.</code><code class="sig-name descname">print_cv_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fitted_model</span><span class="p">:</span> <span class="n">sklearn.model_selection.RandomizedSearchCV</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#titanic.models.train.print_cv_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty prints the best CV score attained by the randomized hyperparameter
+search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fitted_model</strong> – The fitted CV search object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string stating the name of the estimator, the score, and the
+95% margin of error around the score.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.models.train.vote">
+<code class="sig-prename descclassname">titanic.models.train.</code><code class="sig-name descname">vote</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span><span class="p">:</span> <span class="n">pandas.DataFrame</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">pandas.Series</span></em>, <em class="sig-param"><span class="n">fitted_models</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; sklearn.ensemble.VotingClassifier<a class="headerlink" href="#titanic.models.train.vote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train a voting classifier based on a set of fitted models</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Training data covariates</p></li>
+<li><p><strong>y</strong> – Training data response</p></li>
+<li><p><strong>fitted_models</strong> – Fitted RandomizedSearchCV objects from <a class="reference internal" href="#titanic.models.train.fit_models" title="titanic.models.train.fit_models"><code class="xref py py-func docutils literal notranslate"><span class="pre">fit_models()</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A fitted voting classifier model</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-titanic.models.predict">
+<span id="predict-module"></span><h2>Predict module<a class="headerlink" href="#module-titanic.models.predict" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="titanic.models.predict.main">
+<code class="sig-prename descclassname">titanic.models.predict.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_filepath</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">model_filepath</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">output_filepath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#titanic.models.predict.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper around <a class="reference internal" href="#titanic.models.predict.predict" title="titanic.models.predict.predict"><code class="xref py py-func docutils literal notranslate"><span class="pre">predict()</span></code></a> that can be run
+from the command line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_filepath</strong> – Path to the processed data</p></li>
+<li><p><strong>model_filepath</strong> – Path to the pickled models</p></li>
+<li><p><strong>output_filepath</strong> – Path where the predictions will be saved</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="titanic.models.predict.predict">
+<code class="sig-prename descclassname">titanic.models.predict.</code><code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span> &#x2192; pandas.DataFrame<a class="headerlink" href="#titanic.models.predict.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate test set predictions in the correct format for submission to
+Kaggle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – A fitted RandomizedSearchCV object</p></li>
+<li><p><strong>data</strong> – Test data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A DataFrame with one column of predicted <code class="docutils literal notranslate"><span class="pre">Survived</span></code> values, indexed
+by passenger ID</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/titanic.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">titanic</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=ensley&repo=titanic&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Makefile rules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-titanic.data.clean">Data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-titanic.features.transform">Features module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-titanic.models.train">Train module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-titanic.models.predict">Predict module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source/01-initial-data-exploration.html">Initial Data Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/02-feature-engineering.html">Feature Engineering</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="cli.html" title="previous chapter">Makefile rules</a></li>
+      <li>Next: <a href="source/01-initial-data-exploration.html" title="next chapter">Initial Data Exploration</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, John Ensley.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Titanic: Machine Learning from Disaster &#8212; titanic  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Makefile rules" href="cli.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="titanic-machine-learning-from-disaster">
+<h1>Titanic: Machine Learning from Disaster<a class="headerlink" href="#titanic-machine-learning-from-disaster" title="Permalink to this headline">¶</a></h1>
+<p>This is a use case for <a class="reference external" href="https://github.com/ensley/ccdspy">ccdspy</a>, a data science
+project template for Python.</p>
+<p>It implements a solution to the <a class="reference external" href="https://www.kaggle.com/c/titanic">Titanic Kaggle competition</a>
+that ranks in the top 15-20% on the leaderboard.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to reproduce the project is by using the <code class="docutils literal notranslate"><span class="pre">make</span></code> directives.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Available rules:
+
+clean               Delete all models and data
+data                Transform raw data
+docs                Build documentation and copy it to the docs folder
+githooks            Set up githooks
+models              Train models
+mostlyclean         Delete all models and data, except for the raw downloads
+predictions         Create predictions
+raw_data            Pull raw data from Kaggle
+</pre></div>
+</div>
+<p>The project pipeline is:</p>
+<ol class="arabic simple">
+<li><p>Download raw data from Kaggle.</p></li>
+<li><p>Clean the raw data, create new features and transform existing ones.</p></li>
+<li><p>Train the models using the training data.</p></li>
+<li><p>Generate predictions using the test data.</p></li>
+</ol>
+<p>Those four steps correspond to the following directives:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">raw_data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">models</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">predictions</span></code></p></li>
+</ol>
+<p>For each of these steps, <code class="docutils literal notranslate"><span class="pre">make</span></code> will run as many of the preceding steps as
+necessary to ensure the required input files exist. This means that, starting
+from a completely empty (or nonexistent) <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory, running
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">predictions</span></code> will perform the entire pipeline from raw data download
+to generating predictions.</p>
+<p>See <a class="reference internal" href="cli.html"><span class="doc">Makefile rules</span></a> for details on each of these directives.</p>
+</div>
+<div class="section" id="additional-documentation">
+<h2>Additional Documentation<a class="headerlink" href="#additional-documentation" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Makefile rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#make-clean"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#make-data"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#make-docs"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#make-githooks"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">githooks</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#make-models"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">models</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#make-mostlyclean"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">mostlyclean</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#make-predictions"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">predictions</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#make-raw-data"><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">raw_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Python Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-titanic.data.clean">Data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-titanic.features.transform">Features module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-titanic.models.train">Train module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-titanic.models.predict">Predict module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source/01-initial-data-exploration.html">Initial Data Exploration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Data-at-a-glance">Data at a glance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Target-variable:-Survived">Target variable: <code class="docutils literal notranslate"><span class="pre">Survived</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Pclass---Ticket-Class"><code class="docutils literal notranslate"><span class="pre">Pclass</span></code> - Ticket Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Sex"><code class="docutils literal notranslate"><span class="pre">Sex</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Age"><code class="docutils literal notranslate"><span class="pre">Age</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#SibSp---Number-of-siblings-and-spouses-aboard"><code class="docutils literal notranslate"><span class="pre">SibSp</span></code> - Number of siblings and spouses aboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Parch---Number-of-parents-and-children-aboard"><code class="docutils literal notranslate"><span class="pre">Parch</span></code> - Number of parents and children aboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Fare"><code class="docutils literal notranslate"><span class="pre">Fare</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Embarked---Port-of-Embarkation"><code class="docutils literal notranslate"><span class="pre">Embarked</span></code> - Port of Embarkation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/01-initial-data-exploration.html#Correlated-Features">Correlated Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/01-initial-data-exploration.html#Class-and-Fare">Class and Fare</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source/02-feature-engineering.html">Feature Engineering</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="#">
+    <img class="logo" src="_static/titanic.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">titanic</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=ensley&repo=titanic&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Makefile rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Python Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/01-initial-data-exploration.html">Initial Data Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/02-feature-engineering.html">Feature Engineering</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="cli.html" title="next chapter">Makefile rules</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, John Ensley.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

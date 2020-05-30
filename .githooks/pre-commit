@@ -1,0 +1,3 @@
+#!/bin/sh
+jupytext --from notebooks//ipynb --to notebook-scripts//py:percent --pre-commit
+git reset HEAD **/*.ipynb
