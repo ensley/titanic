@@ -1,8 +1,5 @@
 # titanic
 
-[![PyPI - Version](https://img.shields.io/pypi/v/titanic.svg)](https://pypi.org/project/titanic)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/titanic.svg)](https://pypi.org/project/titanic)
-
 -----
 
 ## Table of Contents
