@@ -1,0 +1,9 @@
+site_name: Titanic
+theme:
+  name: material
+  
+nav:
+  - index.md
+  
+plugins:
+  - mkdocs-jupyter

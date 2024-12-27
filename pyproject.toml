@@ -1,0 +1,85 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "titanic"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "John Ensley", email = "johnensley17@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "click",
+]
+
+[project.urls]
+Documentation = "https://github.com/ensley/titanic#readme"
+Issues = "https://github.com/ensley/titanic/issues"
+Source = "https://github.com/ensley/titanic"
+
+[project.scripts]
+titanic = "titanic.cli:titanic"
+
+[tool.hatch.version]
+path = "src/titanic/__about__.py"
+
+[tool.hatch.envs.default]
+extra-dependencies = [
+  "ipykernel",
+  "ipywidgets",
+  "jupyter",
+  "jupytext",
+]
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/titanic tests}"
+
+[tool.coverage.run]
+source_pkgs = ["titanic", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/titanic/__about__.py",
+]
+
+[tool.coverage.paths]
+titanic = ["src/titanic", "*/titanic/src/titanic"]
+tests = ["tests", "*/titanic/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocs-jupyter",
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "mkdocs build --config-file docs/mkdocs.yml --clean --strict"
+serve = "mkdocs serve --config-file docs/mkdocs.yml --dev-addr localhost:8000"
